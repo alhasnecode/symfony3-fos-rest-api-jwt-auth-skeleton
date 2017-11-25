@@ -1,0 +1,3 @@
+game:
+    type: rest
+    resource: '@AppBundle/Controller/GameController.php'

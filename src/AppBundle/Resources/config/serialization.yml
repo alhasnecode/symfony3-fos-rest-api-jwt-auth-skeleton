@@ -1,0 +1,37 @@
+AppBundle\Entity\Game:
+    attributes:
+        id:
+            groups: ['game', 'category', 'console']
+        name:
+            groups: ['game', 'category', 'console']
+        description:
+            groups: ['game', 'category', 'console']
+        image:
+            groups: ['game', 'category', 'console']
+        price:
+            groups: ['game', 'category', 'console']
+        categories:
+            groups: ['game']
+        console:
+            groups: ['game']
+
+
+AppBundle\Entity\Console:
+    attributes:
+        id:
+            groups: ['console', 'game']
+        name:
+            groups: ['console', 'game']
+        image:
+            groups: ['console', 'game']
+        games:
+            groups: ['console']
+
+AppBundle\Entity\Category:
+    attributes:
+        id:
+            groups: ['category', 'game']
+        name:
+            groups: ['category', 'game']
+        games:
+            groups: ['category']
