@@ -1,3 +1,7 @@
 game:
     type: rest
+    prefix: /api
     resource: '@AppBundle/Controller/GameController.php'
+
+api_login_check:
+    path: /api/secure/login_check

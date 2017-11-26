@@ -51,7 +51,7 @@ class Game
     private $price;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Category", inversedBy="products", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="Category", inversedBy="games", cascade={"persist"})
      * @ORM\JoinTable(name="game_category")
      */
     private $categories;
