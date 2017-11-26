@@ -2,14 +2,14 @@
 
 namespace AppBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use FOS\RestBundle\Controller\FOSRestController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use FOS\RestBundle\Controller\Annotations as Rest; // Alias for all annotations
-use AppBundle\Entity\Place;
 
-class GameController extends Controller
+
+class GameController extends FOSRestController
 {
 
     /**
@@ -34,5 +34,14 @@ class GameController extends Controller
 			return new JsonResponse(['message' => 'The requested ressource was not found'], Response::HTTP_NOT_FOUND);
 		}
 		return $game;
+	}
+
+	/**
+	 * @Rest\View(serializerGroups={"game"}, statusCode=Response::HTTP_CREATED)
+	 * @Rest\Post("/secure/games")
+	 *
+	 */
+	public function postGameAction(Request $request){
+		return new JsonResponse(array('status' => 201), Response::HTTP_CREATED);
 	}
 }

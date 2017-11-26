@@ -2,23 +2,40 @@
 # https://symfony.com/doc/current/security.html
 security:
 
+    encoders:
+        Symfony\Component\Security\Core\User\User:
+              algorithm: plaintext
     # https://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
     providers:
         in_memory:
-            memory: ~
+            memory:
+                users:
+                    admin: { password: admin, roles: [ 'ROLE_ADMIN' ] }
 
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
+        login:
+            pattern:  ^/api/secure/login
+            stateless: true
+            anonymous: true
+            form_login:
+                check_path:               /api/secure/login_check
+                success_handler:          lexik_jwt_authentication.handler.authentication_success
+                failure_handler:          lexik_jwt_authentication.handler.authentication_failure
+                require_previous_session: false
+                username_parameter: username
+                password_parameter: password
 
-        main:
-            anonymous: ~
-            # activate different ways to authenticate
+        api:
+            pattern:   ^/api/secure
+            stateless: true
+            guard:
+                authenticators:
+                    - lexik_jwt_authentication.jwt_token_authenticator
 
-            # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
-            #http_basic: ~
-
-            # https://symfony.com/doc/current/security/form_login_setup.html
-            #form_login: ~
+    access_control:
+        - { path: ^/api/secure/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api/secure,       roles: IS_AUTHENTICATED_FULLY }
