@@ -1,6 +1,6 @@
 # Symfony 3 Rest API Example
 
-A Symfony 3 Sample Rest API App using FOSRestBundle with JWT Authentication
+A Symfony 3 Sample Rest API App using FOSRestBundle with Json Web Tokens Authentication
 
 ## Requirements
 
@@ -21,7 +21,7 @@ A Symfony 3 Sample Rest API App using FOSRestBundle with JWT Authentication
 - Get the admin JWT token to access and execute secured urls `/api/secure/^`:
   - Request the admin token with `admin` for username and password values:
 
-    `$ curl -i -H "Accept: application/json" -H "Content-Type: application/json" -X POST http://127.0.0.1:8000/api/secure/login_check`
+    `$ curl -i -H "Accept: application/json" -H "Content-Type: application/json" -X POST -d '{"username":"admin","password":"admin"}' http://127.0.0.1:8000/api/secure/login_check`
 
   - Copy the returned token string and paste it in an Authorization header for
     the secured url request:
