@@ -1,4 +1,4 @@
-# Symfony 3 Rest API Example
+# Symfony 3 Rest API Skeleton
 
 A Symfony 3 Sample Rest API App using FOSRestBundle with Json Web Tokens Authentication
 
